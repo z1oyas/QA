@@ -1,0 +1,611 @@
+{
+	"info": {
+		"_postman_id": "083f862b-a0bf-4494-8bc7-76ffc9de7bd9",
+		"name": "CreateTask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15448743"
+	},
+	"item": [
+		{
+			"name": "PositiveCreate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.not.eql(\"error\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=test&task_description=test description&email_owner={{paramsEmail}}&email_assign={{paramsEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "test"
+						},
+						{
+							"key": "task_description",
+							"value": "test description"
+						},
+						{
+							"key": "email_owner",
+							"value": "{{paramsEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": "{{paramsEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "email_owner not exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"error\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=test&task_description=test description&email_owner={{$randomEmail}}&email_assign={{paramsEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "test"
+						},
+						{
+							"key": "task_description",
+							"value": "test description"
+						},
+						{
+							"key": "email_owner",
+							"value": "{{$randomEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": "{{paramsEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "email_assign not exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"error\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=test&task_description=test description&email_owner={{paramsEmail}}&email_assign={{$randomEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "test"
+						},
+						{
+							"key": "task_description",
+							"value": "test description"
+						},
+						{
+							"key": "email_owner",
+							"value": "{{paramsEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": "{{$randomEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No task_title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"error\");\r",
+							"    pm.expect(jsonData.message).to.eql(\" Параметр task_title имеет  неверное значение\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=&task_description=test description&email_owner={{paramsEmail}}&email_assign={{paramsEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": ""
+						},
+						{
+							"key": "task_description",
+							"value": "test description"
+						},
+						{
+							"key": "email_owner",
+							"value": "{{paramsEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": "{{paramsEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no task_description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"error\");\r",
+							"    pm.expect(jsonData.message).to.eql(\" Параметр task_description имеет  неверное значение\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=test&task_description=&email_owner={{paramsEmail}}&email_assign={{paramsEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "test"
+						},
+						{
+							"key": "task_description",
+							"value": ""
+						},
+						{
+							"key": "email_owner",
+							"value": "{{paramsEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": "{{paramsEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no owner",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"error\");\r",
+							"    pm.expect(jsonData.message).to.eql(\" email_owner  некорректный\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=test&task_description=test description&email_owner=&email_assign={{paramsEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "test"
+						},
+						{
+							"key": "task_description",
+							"value": "test description"
+						},
+						{
+							"key": "email_owner",
+							"value": ""
+						},
+						{
+							"key": "email_assign",
+							"value": "{{paramsEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no assign",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"error\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"Параметр email_assign некорректный\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=test&task_description=test description&email_owner={{paramsEmail}}&email_assign=",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "test"
+						},
+						{
+							"key": "task_description",
+							"value": "test description"
+						},
+						{
+							"key": "email_owner",
+							"value": "{{paramsEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "50 s title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.not.eql(\"error\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=title 50 symb  stask 50 symbolstask 50 symbolstask&task_description=test description&email_owner={{paramsEmail}}&email_assign={{paramsEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "title 50 symb  stask 50 symbolstask 50 symbolstask"
+						},
+						{
+							"key": "task_description",
+							"value": "test description"
+						},
+						{
+							"key": "email_owner",
+							"value": "{{paramsEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": "{{paramsEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": ">50 s title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"error\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=title 51 symb   stask 50 symbolstask 50 symbolstask&task_description=test description&email_owner={{paramsEmail}}&email_assign={{paramsEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "title 51 symb   stask 50 symbolstask 50 symbolstask"
+						},
+						{
+							"key": "task_description",
+							"value": "test description"
+						},
+						{
+							"key": "email_owner",
+							"value": "{{paramsEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": "{{paramsEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "500 s desc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.not.eql(\"error\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=test&task_description=desc 500 symb  stask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask&email_owner={{paramsEmail}}&email_assign={{paramsEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "test"
+						},
+						{
+							"key": "task_description",
+							"value": "desc 500 symb  stask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask"
+						},
+						{
+							"key": "email_owner",
+							"value": "{{paramsEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": "{{paramsEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": ">500 s desc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PositiveCreate\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.type).to.eql(\"error\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://users.bugred.ru/tasks/rest/createtask?task_title=test&task_description=desc 501 symb   stask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask&email_owner={{paramsEmail}}&email_assign={{paramsEmail}}",
+					"protocol": "http",
+					"host": [
+						"users",
+						"bugred",
+						"ru"
+					],
+					"path": [
+						"tasks",
+						"rest",
+						"createtask"
+					],
+					"query": [
+						{
+							"key": "task_title",
+							"value": "test"
+						},
+						{
+							"key": "task_description",
+							"value": "desc 501 symb   stask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask 50 symbolstask"
+						},
+						{
+							"key": "email_owner",
+							"value": "{{paramsEmail}}"
+						},
+						{
+							"key": "email_assign",
+							"value": "{{paramsEmail}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
